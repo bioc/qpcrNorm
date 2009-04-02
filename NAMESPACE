@@ -1,0 +1,5 @@
+import(methods, affy, limma)
+
+export(calcCV, ctQc, matrixByPlate, normQpcrHouseKeepingGenes, normQpcrQuantile, normQpcrRankInvariant, plotVarMean, readQpcr, readQpcrBatch, writeQpcr) 
+
+exportClasses(qpcrBatch)
