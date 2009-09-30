@@ -4,9 +4,13 @@
 \title{ Function for Quantile Normalization of qPCR Data. }
 \description{
 	Implements quantile normalization for a \code{\link{qpcrBatch}} object. 
-	We have adapted this algorithm from the function \code{\link[limma]{normalizeBetweenArrays}} from the \pkg{limma} package. 
-	Data in a \code{\link{qpcrBatch}} object is normalized such that within an experiment, the expression distributions 
-	across plates are more or less identical, and across experiments, the expression distributions 
+	We have adapted this algorithm from the function
+	\code{\link[limma:normalizebetweenarrays]{normalizeBetweenArrays}}
+	from the \pkg{limma} package.  
+	Data in a \code{\link{qpcrBatch}} object is normalized such that
+	within an experiment, the expression distributions  
+	across plates are more or less identical, and across
+	experiments, the expression distributions  
 	are also now more or less identical. 
 }
 \usage{
@@ -23,7 +27,8 @@ normQpcrQuantile(qBatch)
 	Jess Mar \email{jess@jimmy.harvard.edu} 
 }
 \seealso{ 
-  \code{\link{normQpcrRankInvariant}}, \code{\link[limma]{normalizeBetweenArrays}}
+  \code{\link{normQpcrRankInvariant}},
+  \code{\link[limma:normalizebetweenarrays]{normalizeBetweenArrays}} 
 }
 \examples{
  data(qpcrBatch.object) 
