@@ -7,10 +7,9 @@
 	1st column = names denoting genes or primer pairs \cr
 	2nd column = plate index of each gene or primer pair \cr
 	remaining columns = (replicate) Ct values. \cr
-	Note: other annotation fields may be added after the Ct value columns. \cr
 }
 \usage{
-readQpcr(fileName, header = TRUE, qc = FALSE, quote = "\"", dec = ".", fill = TRUE, comment.char = "", ...)
+readQpcr(fileName, header = FALSE, qc = FALSE, quote = "\"", dec = ".", fill = TRUE, comment.char = "", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -25,10 +24,9 @@ readQpcr(fileName, header = TRUE, qc = FALSE, quote = "\"", dec = ".", fill = TR
   \item{\dots}{ further arguments to be passed to \code{\link{read.table}}. }
 }
 \details{
-  Currently fields appearing after the Ct value columns are not associated with the output of this function.
   Note: the majority of arguments to readQpcr are identical to those supplied to read.table. These have been included to 
   give the user greater control over data input, should the data deviate from a standard tab-delimited file structure. 
-  For a standard tab-delimited text file, specifying the \code{fileName} should be sufficient.   
+  For a standard tab-delimited text file (without column headings), specifying the \code{fileName} should be sufficient.   
 }
 \value{
   A \code{\link{qpcrBatch}} object. 
@@ -41,6 +39,3 @@ readQpcr(fileName, header = TRUE, qc = FALSE, quote = "\"", dec = ".", fill = TR
 	## onerun.data <- readQpcr("singleQpcrRun.txt")
 }
 \keyword{IO}
-
-
-boo sarita rocks

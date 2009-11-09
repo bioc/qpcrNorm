@@ -247,31 +247,32 @@ function(qpcrBatch1, qpcrBatch2, normTag1="Normalization Type1", normTag2="Norma
 }
 
 `readQpcr` <-
-function(fileName, header=TRUE, qc=FALSE, quote="\"", dec=".", fill=TRUE, comment.char="", ...){
+function(fileName, header=FALSE, qc=FALSE, quote="\"", dec=".", fill=TRUE, comment.char="", ...){
 	qpcr.data <- read.table(fileName, header=header, quote=quote, dec=dec, fill=fill, comment.char=comment.char, ...)
 	primerNames <- as.character(qpcr.data[,1])
 	plateID <- as.character(qpcr.data[,2])
-	otherNames <- tolower(colnames(qpcr.data)[-(1:2)]) ; whichCt <- grep("ct", otherNames)
-	ctVals <- qpcr.data[,whichCt+2] ; ctVals <- data.matrix(ctVals) 
-	if( qc ){
-		ctVals.qced <- ctQc(ctVals) 
-	}
-	else{
-		ctVals <- apply(ctVals, 1, mean, na.rm=TRUE)
+	ctVals <- data.matrix(qpcr.data[,-(1:2)])
+	if( ncol(ctVals) > 1 ){
+		if( qc ){
+			ctVals.qced <- ctQc(ctVals) 
+		}
+		else{
+			ctVals <- apply(ctVals, 1, mean, na.rm=TRUE)
+		}
 	}
 	qres <- new("qpcrBatch", geneNames=primerNames, plateIndex=plateID, exprs = cbind(ctVals), normalized=FALSE, normGenes=primerNames)
 	return(qres)
 }
 
 `readQpcrBatch` <-
-function(..., filenames=character(), qc=FALSE){
+function(..., filenames=character(), header=FALSE, qc=FALSE){
 	x.data <- NULL
 	if(length(filenames) == 0 ){ filenames = dir() }
 	for( i in 1:length(filenames) ){
-		x.data <- cbind(x.data, readQpcr(filenames[i], qc=qc, ...)@exprs)
+		x.data <- cbind(x.data, readQpcr(filenames[i], header=header, qc=qc, ...)@exprs)
 		# put something here to check that genes and plates are consistent
 	}
-	i <- 1 ; x <- readQpcr(filenames[i], qc=qc, ...)
+	i <- 1 ; x <- readQpcr(filenames[i], header=header, qc=qc, ...)
 	return(new("qpcrBatch", geneNames = x@primerNames, plateIndex = x@plateIndex, exprs = x.data, normalized = FALSE, normGenes=x@normGenes))
 }
 
@@ -282,7 +283,4 @@ function(qBatch, fileName, ...){
 	colnames(xdat) <- c("GeneNames", "PlateIndex", colnames(qBatch@exprs))
 	write.table(xdat, file=fileName, row.names=FALSE, col.names=TRUE)
 }
-
-
-
 

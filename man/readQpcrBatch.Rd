@@ -9,12 +9,13 @@
   are being analyzed in each experiment.
 }
 \usage{
-readQpcrBatch(..., filenames = character(), qc = FALSE)
+readQpcrBatch(..., filenames = character(), header = FALSE, qc = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{...}{ Filenames separated by a comma. }
   \item{filenames}{ Character vector specifying file names. }
+  \item{header}{ Logical value, TRUE if the file contains the names of the variables as its first line. }
   \item{qc}{ Logical value, TRUE if a QC filter \code{\link{ctQc}} should be applied to the data. \cr
 				If qc = F, the replicate Ct values will be averaged. See \code{\link{ctQc}}. }
 }
@@ -25,12 +26,10 @@ All files must conform to the following structure: \cr
  	1st column = names denoting genes or primer pairs \cr
 	2nd column = plate index of each gene or primer pair \cr
 	remaining columns = (replicate) Ct values \cr
-	other annotation fields may be added after the Ct value columns. /cr /cr
 
-Currently fields appearing after the Ct value columns are not associated with the output of this function.
   Note: the majority of arguments to readQpcr are identical to those supplied to read.table. These have been included to 
   give the user greater control over data input, should the data deviate from a standard tab-delimited file structure. 
-  For a set of standard tab-delimited text files, specifying the \code{filenames} should be sufficient.   
+  For a set of standard tab-delimited text files (without column headers), specifying the \code{filenames} should be sufficient.   
 }
 \value{
 	A \code{\link{qpcrBatch}} object.
