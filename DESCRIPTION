@@ -1,7 +1,7 @@
 Package: qpcrNorm
 Type: Package
 Title: Data-driven normalization strategies for high-throughput qPCR data.
-Version: 1.61.0
+Version: 1.62.0
 Date: 2009-11-08
 Author: Jessica Mar
 Maintainer: Jessica Mar <jess@jimmy.harvard.edu>
